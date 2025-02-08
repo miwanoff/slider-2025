@@ -18,3 +18,11 @@
     height: 80px;
     object-fit: cover;
 }
+
+.fade {
+    opacity: 0 !important;
+}
+
+.go {
+    left: 520;
+}

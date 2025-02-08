@@ -4,6 +4,13 @@ const links = [
   "images/UK_advice-gardening-growing-poppies_header.jpg",
 ]; // масив шляхів до картинок
 let i = 0;
+let effect = "none";
+
+const effectButton = document.getElementById("get_effect");
+
+const formEl = document.forms.effects;
+console.log(formEl);
+
 window.onload = function () {
   let slider = document.getElementById("slider");
   let nextButton = document.getElementById("next");
@@ -12,15 +19,14 @@ window.onload = function () {
 
   let imagesMini = document.querySelectorAll("img.mini");
   for (let i = 0; i < imagesMini.length; i++) {
-    imagesMini[i].onclick = showSlide;
+    imagesMini[i].addEventListener("click", showSlide);
   }
 
   function showSlide(event) {
     let image = event.target;
-    //   let name = image.id;
-    //   name = name + ".jpg";
-    //   image.src = "images/" + name;
-    
+    let src = image.src;
+    console.log(src);
+    slider.src = src;
   }
 
   function next() {
@@ -28,6 +34,27 @@ window.onload = function () {
     if (i >= links.length) {
       i = 0;
     }
+    addEffect();
     slider.src = links[i];
+    removeEffect();
   }
 };
+
+function addEffect() {
+  slider.classList.add(effect);
+}
+
+function removeEffect() {
+  slider.classList.remove(effect);
+}
+
+effectButton.addEventListener("click", getEffect);
+
+function getEffect() {
+  for (let i = 0; i < formEl.length; i++) {
+    if (formEl[i].checked) {
+      effect = formEl[i].value;
+      console.log(effect);
+    }
+  }
+}
